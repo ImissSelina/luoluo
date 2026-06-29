@@ -243,7 +243,7 @@ async function forwardToUpstream({ url, apiKey, payload }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`
+        Authorization: buildAuthorizationHeader(apiKey)
       },
       body: JSON.stringify(payload)
     });
@@ -304,7 +304,7 @@ async function forwardMultipartToUpstream({ url, apiKey, formData }) {
     response = await fetchWithTimeout(url, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`
+        Authorization: buildAuthorizationHeader(apiKey)
       },
       body: formData
     });
@@ -360,7 +360,7 @@ async function forwardMultipartToUpstream({ url, apiKey, formData }) {
 }
 
 function requireEnv(name) {
-  const value = process.env[name];
+  const value = normalizeEnvValue(process.env[name]);
   if (!value) {
     throw Object.assign(new Error(`Missing server environment variable: ${name}`), {
       statusCode: 500
@@ -370,15 +370,27 @@ function requireEnv(name) {
 }
 
 function getOptionalEnv(name, fallback = "") {
-  return process.env[name] || fallback;
+  return normalizeEnvValue(process.env[name]) || fallback;
 }
 
 function getFirstEnv(names, fallback = "") {
   for (const name of names) {
-    const value = process.env[name];
+    const value = normalizeEnvValue(process.env[name]);
     if (value) return value;
   }
   return fallback;
+}
+
+function normalizeEnvValue(value) {
+  return typeof value === "string" ? value.trim() : value;
+}
+
+function buildAuthorizationHeader(apiKey) {
+  const value = normalizeEnvValue(apiKey);
+  if (/^Bearer\s+/i.test(value)) {
+    return value;
+  }
+  return `Bearer ${value}`;
 }
 
 function requireFirstEnv(names) {
