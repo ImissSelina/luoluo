@@ -147,6 +147,18 @@ function isRateLimited(req) {
 }
 
 function readJsonBody(req) {
+  if (req.body !== undefined) {
+    if (typeof req.body === "string") {
+      return Promise.resolve(parseJsonBodyText(req.body));
+    }
+    if (Buffer.isBuffer(req.body)) {
+      return Promise.resolve(parseJsonBodyText(req.body.toString("utf8")));
+    }
+    if (typeof req.body === "object" && req.body !== null) {
+      return Promise.resolve(req.body);
+    }
+  }
+
   return new Promise((resolve, reject) => {
     let size = 0;
     const chunks = [];
@@ -169,14 +181,24 @@ function readJsonBody(req) {
       }
 
       try {
-        resolve(JSON.parse(raw));
-      } catch {
-        reject(Object.assign(new Error("Invalid JSON body"), { statusCode: 400 }));
+        resolve(parseJsonBodyText(raw));
+      } catch (error) {
+        reject(error);
       }
     });
 
     req.on("error", reject);
   });
+}
+
+function parseJsonBodyText(raw) {
+  if (!raw) return {};
+
+  try {
+    return JSON.parse(raw);
+  } catch {
+    throw Object.assign(new Error("Invalid JSON body"), { statusCode: 400 });
+  }
 }
 
 function readRawBody(req) {
@@ -234,7 +256,13 @@ async function forwardToUpstream({ url, apiKey, payload }) {
         }
       };
     }
-    throw error;
+    return {
+      statusCode: 502,
+      body: {
+        error: "Network request to upstream API failed",
+        detail: getNetworkErrorDetail(error)
+      }
+    };
   }
 
   const text = await response.text();
@@ -289,7 +317,13 @@ async function forwardMultipartToUpstream({ url, apiKey, formData }) {
         }
       };
     }
-    throw error;
+    return {
+      statusCode: 502,
+      body: {
+        error: "Network request to upstream API failed",
+        detail: getNetworkErrorDetail(error)
+      }
+    };
   }
 
   const text = await response.text();
@@ -504,6 +538,17 @@ function extractUpstreamError(data, fallback) {
     fallback
   );
   return typeof message === "string" ? message : fallback;
+}
+
+function getNetworkErrorDetail(error) {
+  const cause = error?.cause || {};
+  return {
+    message: error?.message || "fetch failed",
+    code: cause.code || error?.code || "",
+    errno: cause.errno || "",
+    syscall: cause.syscall || "",
+    hostname: cause.hostname || ""
+  };
 }
 
 function parseMultipartBody(buffer, contentType) {
