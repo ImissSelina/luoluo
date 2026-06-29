@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>落落工作室 | AI 技术服务与数字产品</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css"
+      crossorigin="anonymous"
+      data-katex-cdn
+    />
+    <script>
+      window.addEventListener("error", (event) => {
+        const target = event.target;
+        if (target?.dataset?.katexCdn !== undefined) {
+          const fallback = document.createElement("link");
+          fallback.rel = "stylesheet";
+          fallback.href = "assets/vendor/katex/katex.min.css";
+          document.head.appendChild(fallback);
+        }
+      }, true);
+    </script>
+    <link rel="stylesheet" href="styles.css?v=20260610-image-mode-diff" />
+  </head>
+  <body data-view="home" data-loading="true">
+    <script>
+      document.body.dataset.loadingStartedAt = String(Date.now());
+    </script>
+    <div class="intro-loader" id="intro-loader" aria-hidden="true">
+      <div class="intro-mark">
+        <span class="intro-ring"></span>
+        <img src="assets/studio-logo.jpg" alt="" />
+      </div>
+      <strong>&#x843D;&#x843D;&#x5DE5;&#x4F5C;&#x5BA4;</strong>
+      <span>AI TECHNOLOGY STUDIO</span>
+    </div>
+    <canvas id="particle-field" aria-hidden="true"></canvas>
+
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-orbit">
+            <img src="assets/studio-logo.jpg" alt="&#x843D;&#x843D;&#x5DE5;&#x4F5C;&#x5BA4;" />
+          </div>
+          <div>
+            <p class="eyebrow">LUOLUO STUDIO</p>
+            <h1>落落工作室</h1>
+          </div>
+        </div>
+
+        <nav class="primary-nav" aria-label="&#x4E3B;&#x8981;&#x529F;&#x80FD;">
+          <button class="nav-button active" data-view="home">
+            <span class="nav-mark"></span>
+            <span>&#x9996;&#x9875;</span>
+          </button>
+          <button class="nav-button" data-view="products">
+            <span class="nav-mark"></span>
+            <span>产品与成果</span>
+          </button>
+          <button class="nav-button" data-view="services">
+            <span class="nav-mark"></span>
+            <span>AI 服务</span>
+          </button>
+          <button class="nav-button" data-view="chat">
+            <span class="nav-mark"></span>
+            <span>AI 问答</span>
+          </button>
+          <button class="nav-button" data-view="image">
+            <span class="nav-mark"></span>
+            <span>图像生成</span>
+          </button>
+          <button class="nav-button" data-view="contact">
+            <span class="nav-mark"></span>
+            <span>&#x8054;&#x7CFB;&#x6211;&#x4EEC;</span>
+          </button>
+        </nav>
+
+        <section class="studio-signal">
+          <img src="assets/studio-logo.jpg" alt="" />
+          <div>
+            <strong>落落数字产品中枢</strong>
+            <span>产品、AI、视觉与系统交付的轻量工作室。</span>
+          </div>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">LUOLUO STUDIO SYSTEM</p>
+            <h2 id="view-title">&#x9996;&#x9875;</h2>
+          </div>
+          <div class="status-pill">
+            <span></span>
+            产品持续建设中
+          </div>
+        </header>
+
+        <section class="view view-active" id="home-view">
+          <div class="home-page">
+            <header class="home-nav">
+              <span>LUOLUO STUDIO</span>
+              <nav aria-label="&#x9996;&#x9875;&#x5FEB;&#x901F;&#x5165;&#x53E3;">
+                <button type="button" data-view-jump="products">产品与成果</button>
+                <button type="button" data-view-jump="services">AI 服务</button>
+                <button type="button" data-view-jump="contact">联系我们</button>
+              </nav>
+            </header>
+            <section class="hero-showcase">
+              <div class="meteor-logo" aria-hidden="true">
+                <span class="tech-ring tech-ring-inner"></span>
+                <span class="tech-ring tech-ring-outer"></span>
+                <span class="meteor-ring ring-one"></span>
+                <span class="meteor-ring ring-two"></span>
+                <span class="meteor-ring ring-three"></span>
+                <span class="meteor-trail trail-one"></span>
+                <span class="meteor-trail trail-two"></span>
+                <span class="meteor-trail trail-three"></span>
+                <span class="energy-beam beam-one"></span>
+                <span class="energy-beam beam-two"></span>
+                <span class="energy-beam beam-three"></span>
+                <span class="meteor-dot dot-one"></span>
+                <span class="meteor-dot dot-two"></span>
+                <span class="meteor-dot dot-three"></span>
+                <span class="meteor-node node-one"></span>
+                <span class="meteor-node node-two"></span>
+                <span class="meteor-node node-three"></span>
+                <img src="assets/studio-logo.jpg" alt="" />
+              </div>
+              <p class="eyebrow">AI PRODUCT STUDIO</p>
+              <h2>&#x843D;&#x843D;&#x5DE5;&#x4F5C;&#x5BA4;</h2>
+              <p class="hero-copy">我们把 AI 能力、产品设计和视觉表达组合成可落地的数字产品，为创作者、品牌和团队打造更高效的内容、系统与增长工具。</p>
+              <div class="hero-actions">
+                <button class="glow-button" type="button" data-view-jump="products" data-particle-button>
+                  <span>查看产品与成果</span>
+                </button>
+                <button class="ghost-button" type="button" data-view-jump="services">
+                  <span>了解 AI 服务</span>
+                </button>
+              </div>
+            </section>
+
+            <section class="feature-grid" aria-label="工作室能力">
+              <article class="feature-card">
+                <img src="assets/icon-gpt.jpg" alt="" />
+                <span>01</span>
+                <h3>产品与成果</h3>
+                <p>沉淀 AI 控制台、网站系统、视觉方案与自动化工具，让能力以产品矩阵的方式持续生长。</p>
+                <button class="feature-link" type="button" data-view-jump="products">查看矩阵</button>
+              </article>
+              <article class="feature-card">
+                <img src="assets/icon-claude.jpg" alt="" />
+                <span>02</span>
+                <h3>AI 服务</h3>
+                <p>围绕模型接入、图像创作、内容生产和业务流程，提供能真正接入日常工作的 AI 方案。</p>
+                <button class="feature-link" type="button" data-view-jump="services">了解服务</button>
+              </article>
+              <article class="feature-card">
+                <img src="assets/icon-mimo.jpg" alt="" />
+                <span>03</span>
+                <h3>定制交付</h3>
+                <p>从需求梳理、界面设计到上线部署，兼顾审美、效率和后续迭代，交付可长期使用的系统。</p>
+                <button class="feature-link" type="button" data-view-jump="contact">开始沟通</button>
+              </article>
+            </section>
+
+            <section class="studio-metrics" aria-label="工作室方向">
+              <div>
+                <strong>Product</strong>
+                <span>数字产品设计</span>
+              </div>
+              <div>
+                <strong>AI</strong>
+                <span>模型能力接入</span>
+              </div>
+              <div>
+                <strong>Visual</strong>
+                <span>品牌视觉表达</span>
+              </div>
+              <div>
+                <strong>Delivery</strong>
+                <span>从原型到上线</span>
+              </div>
+            </section>
+
+            <section class="mission-band">
+              <div>
+                <p class="eyebrow">STUDIO DIRECTION</p>
+                <h3>把想法变成可展示、可运行、可增长的产品</h3>
+              </div>
+              <p>落落工作室关注实用、美感与效率的平衡。我们不只做一个功能入口，而是帮助项目形成清晰的产品结构、稳定的技术实现和有记忆点的视觉体验。</p>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="products-view">
+          <div class="showcase-page">
+            <header class="section-heading">
+              <p class="eyebrow">PRODUCTS & RESULTS</p>
+              <h3>产品与成果矩阵</h3>
+              <p>这里会逐步沉淀工作室的上线产品、内部工具、客户项目和视觉成果。当前先以产品方向展示工作室的能力版图。</p>
+            </header>
+
+            <section class="product-matrix" aria-label="产品矩阵">
+              <article class="product-card product-card-wide">
+                <div class="product-visual" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div>
+                  <small>已上线</small>
+                  <h4>AI 创作控制台</h4>
+                  <p>整合多模型问答、图像生成、参考图编辑与模板化创作，为个人和团队提供统一的 AI 工作入口。</p>
+                  <button class="feature-link" type="button" data-view-jump="chat">进入体验</button>
+                </div>
+              </article>
+              <article class="product-card">
+                <small>可定制</small>
+                <h4>品牌官网与展示系统</h4>
+                <p>为工作室、个人品牌和商业项目打造高质感官网、作品集、产品展示与转化页面。</p>
+              </article>
+              <article class="product-card">
+                <small>方案中</small>
+                <h4>内容生产自动化</h4>
+                <p>围绕选题、文案、图片、排版和发布流程，构建更稳定的内容生产链路。</p>
+              </article>
+              <article class="product-card">
+                <small>可扩展</small>
+                <h4>私域与客户转化工具</h4>
+                <p>把咨询、资料收集、方案生成和客户跟进做成轻量系统，减少重复沟通成本。</p>
+              </article>
+              <article class="product-card">
+                <small>持续更新</small>
+                <h4>视觉成果资产库</h4>
+                <p>沉淀海报、头像、产品图、界面视觉和品牌素材，形成可复用的创作资产。</p>
+              </article>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="services-view">
+          <div class="showcase-page service-page">
+            <header class="section-heading">
+              <p class="eyebrow">AI SERVICES</p>
+              <h3>AI 服务与定制方案</h3>
+              <p>从模型能力到业务场景，我们把 AI 做成能被团队真正使用的产品、流程和视觉结果。</p>
+            </header>
+
+            <section class="service-grid" aria-label="AI 服务">
+              <article class="service-card">
+                <span>01</span>
+                <h4>模型接入与智能助手</h4>
+                <p>接入 GPT、Claude、MIMO 等模型，构建面向客服、知识库、内容和分析的智能助手。</p>
+              </article>
+              <article class="service-card">
+                <span>02</span>
+                <h4>AI 图像创作系统</h4>
+                <p>支持文生图、参考图编辑、多图模板和风格模仿，让视觉创作流程更稳定。</p>
+              </article>
+              <article class="service-card">
+                <span>03</span>
+                <h4>网站与工具定制</h4>
+                <p>把业务需求做成轻量网页、控制台、小工具或自动化系统，兼顾展示与实际使用。</p>
+              </article>
+              <article class="service-card">
+                <span>04</span>
+                <h4>内容与运营自动化</h4>
+                <p>围绕文案、图片、脚本、资料整理和发布协作，设计更省力的日常工作流。</p>
+              </article>
+            </section>
+
+            <section class="process-strip" aria-label="交付流程">
+              <div>
+                <strong>01</strong>
+                <span>需求澄清</span>
+              </div>
+              <div>
+                <strong>02</strong>
+                <span>方案设计</span>
+              </div>
+              <div>
+                <strong>03</strong>
+                <span>开发联调</span>
+              </div>
+              <div>
+                <strong>04</strong>
+                <span>上线迭代</span>
+              </div>
+            </section>
+
+            <div class="service-actions">
+              <button class="glow-button" type="button" data-view-jump="contact">联系工作室</button>
+              <button class="ghost-button" type="button" data-view-jump="image">体验图像能力</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="chat-view">
+          <div class="model-strip" role="tablist" aria-label="&#x6A21;&#x578B;&#x5207;&#x6362;">
+            <button class="model-card active" data-model="gpt" role="tab" aria-selected="true">
+              <img src="assets/icon-gpt.jpg" alt="" />
+              <span>GPT</span>
+            </button>
+            <button class="model-card" data-model="claude" role="tab" aria-selected="false">
+              <img src="assets/icon-claude.jpg" alt="" />
+              <span>CLAUDE</span>
+            </button>
+            <button class="model-card" data-model="mimo" role="tab" aria-selected="false">
+              <img src="assets/icon-mimo.jpg" alt="" />
+              <span>MIMO</span>
+            </button>
+          </div>
+
+          <div class="chat-panel" data-model-skin="gpt">
+            <div class="model-watermark" aria-hidden="true">
+              <img id="model-watermark-img" src="assets/icon-gpt.jpg" alt="" />
+            </div>
+            <div class="chat-feed" id="chat-feed" aria-live="polite"></div>
+
+            <form class="composer" id="chat-form">
+              <textarea id="chat-input" name="message" rows="2" placeholder="&#x8F93;&#x5165;&#x4F60;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6309; Ctrl + Enter &#x53D1;&#x9001;"></textarea>
+              <button class="glow-button" type="submit" data-particle-button>
+                <span>&#x53D1;&#x9001;</span>
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <section class="view" id="image-view">
+          <div class="image-layout">
+            <div class="mode-tabs" role="tablist" aria-label="&#x56FE;&#x50CF;&#x529F;&#x80FD;">
+              <button class="mode-tab active" data-mode="edit" role="tab" aria-selected="true">&#x4FEE;&#x6539;&#x56FE;&#x7247;</button>
+              <button class="mode-tab" data-mode="generate" role="tab" aria-selected="false">&#x751F;&#x6210;&#x56FE;&#x7247;</button>
+              <button class="mode-tab" data-mode="imitate" role="tab" aria-selected="false">&#x6A21;&#x4EFF;&#x56FE;&#x7247;</button>
+            </div>
+
+            <form class="image-form" id="image-form">
+              <input type="hidden" name="mode" id="image-mode" value="edit" />
+
+              <section class="image-mode-guide" id="image-mode-guide" data-mode="edit">
+                <div>
+                  <span id="image-mode-kicker">EDIT</span>
+                  <strong id="image-mode-title">&#x4FEE;&#x6539;&#x56FE;&#x7247;</strong>
+                  <p id="image-mode-desc">&#x4E0A;&#x4F20;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x539F;&#x56FE;&#xFF0C;&#x7528;&#x6587;&#x5B57;&#x8BF4;&#x660E;&#x8981;&#x8C03;&#x6574;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+                </div>
+                <ul id="image-mode-points">
+                  <li>&#x539F;&#x56FE;&#x5FC5;&#x586B;</li>
+                  <li>&#x5C40;&#x90E8;&#x4FEE;&#x6539;</li>
+                  <li>&#x4FDD;&#x7559;&#x4E3B;&#x4F53;</li>
+                </ul>
+              </section>
+
+              <label class="field-block prompt-field">
+                <span id="image-prompt-label">&#x4FEE;&#x6539;&#x8981;&#x6C42;</span>
+                <textarea id="image-prompt" name="prompt" rows="5" placeholder="&#x4F8B;&#x5982;&#xFF1A;&#x628A;&#x80CC;&#x666F;&#x6539;&#x6210;&#x79D1;&#x6280;&#x84DD;&#x8272;&#xFF0C;&#x4FDD;&#x7559;&#x4EBA;&#x7269;&#x548C;&#x8863;&#x670D;&#x7EC6;&#x8282;"></textarea>
+              </label>
+
+              <div class="field-grid">
+                <label class="upload-zone" data-role="source-upload" data-requires="edit generate imitate">
+                  <input id="source-image" name="images" type="file" accept="image/*" multiple />
+                  <span class="upload-title" id="source-upload-title">&#x4E0A;&#x4F20;&#x539F;&#x56FE;</span>
+                  <small id="source-upload-hint">&#x4FEE;&#x6539;&#x6A21;&#x5F0F;&#x5FC5;&#x586B;&#xFF0C;&#x652F;&#x6301;&#x591A;&#x5F20;</small>
+                </label>
+
+                <label class="field-block template-field" data-role="template-select" data-requires="generate imitate">
+                  <span id="template-select-title">&#x53C2;&#x7167;&#x6A21;&#x677F;</span>
+                  <select id="template-select" name="templates" multiple size="4">
+                    <option value="studio-neon">&#x843D;&#x843D;&#x84DD;&#x7D2B;&#x79D1;&#x6280;</option>
+                    <option value="product-poster">&#x4EA7;&#x54C1;&#x6D77;&#x62A5;&#x8D28;&#x611F;</option>
+                    <option value="avatar-polish">&#x5934;&#x50CF;&#x7CBE;&#x4FEE;&#x98CE;</option>
+                    <option value="cinematic-ui">&#x7535;&#x5F71;&#x7EA7;&#x754C;&#x9762;&#x5149;&#x5F71;</option>
+                  </select>
+                  <small id="template-select-hint">&#x53EF;&#x9009;&#xFF0C;&#x7528;&#x6765;&#x7EA6;&#x675F;&#x751F;&#x6210;&#x98CE;&#x683C;</small>
+                </label>
+
+                <label class="upload-zone" data-role="template-images" data-requires="generate imitate">
+                  <input id="template-images" name="template_images" type="file" accept="image/*" multiple />
+                  <span class="upload-title" id="template-upload-title">&#x4E0A;&#x4F20;&#x53C2;&#x8003;&#x56FE;</span>
+                  <small id="template-upload-hint">&#x53EF;&#x9009;&#xFF0C;&#x652F;&#x6301;&#x591A;&#x5F20;&#x7075;&#x611F;&#x53C2;&#x8003;</small>
+                </label>
+              </div>
+
+              <button class="glow-button wide" type="submit" data-particle-button>
+                <span id="image-submit-label">&#x5F00;&#x59CB;&#x4FEE;&#x6539;</span>
+              </button>
+            </form>
+
+            <aside class="preview-panel">
+              <div class="preview-stage" id="preview-stage">
+                <img src="assets/studio-logo.jpg" alt="&#x843D;&#x843D;&#x5DE5;&#x4F5C;&#x5BA4;&#x9884;&#x89C8;" />
+                <div class="scanline"></div>
+              </div>
+              <div class="result-box" id="image-result">
+                <strong>GPTIMAGE2</strong>
+                <span>&#x4E09;&#x4E2A;&#x6A21;&#x5F0F;&#x5206;&#x522B;&#x8C03;&#x7528;&#x72EC;&#x7ACB;&#x63A5;&#x53E3;&#xFF1A;&#x4FEE;&#x6539;&#x3001;&#x751F;&#x6210;&#x3001;&#x6A21;&#x4EFF;&#x3002;</span>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="contact-view">
+          <div class="contact-page">
+            <section class="contact-panel">
+              <div class="contact-copy">
+                <p class="eyebrow">CONTACT</p>
+                <h3>&#x8054;&#x7CFB;&#x6211;&#x4EEC;</h3>
+                <p>&#x6B22;&#x8FCE;&#x901A;&#x8FC7;&#x5FAE;&#x4FE1;&#x8054;&#x7CFB;&#x843D;&#x843D;&#x5DE5;&#x4F5C;&#x5BA4;&#x3002;</p>
+              </div>
+              <div class="wechat-contact">
+                <span>&#x5FAE;&#x4FE1;&#x53F7;</span>
+                <strong>luoluochat111</strong>
+                <button class="ghost-button contact-copy-button" type="button" data-copy-wechat>
+                  <span>&#x590D;&#x5236;&#x5FAE;&#x4FE1;&#x53F7;</span>
+                </button>
+                <small id="contact-status" aria-live="polite"></small>
+              </div>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js"
+      crossorigin="anonymous"
+      data-katex-cdn
+    ></script>
+    <script>
+      (function loadApp() {
+        function startApp() {
+          const appScript = document.createElement("script");
+          appScript.src = "app.js?v=20260610-image-mode-diff";
+          document.body.appendChild(appScript);
+        }
+
+        if (window.katex) {
+          startApp();
+          return;
+        }
+
+        const fallback = document.createElement("script");
+        fallback.src = "assets/vendor/katex/katex.min.js";
+        fallback.onload = startApp;
+        fallback.onerror = startApp;
+        document.body.appendChild(fallback);
+      })();
+    </script>
+  </body>
+</html>

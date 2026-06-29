@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node --check app.js; if \\($?\\) { \"app.js syntax OK\" })",
+      "PowerShell(Get-Content *)",
+      "PowerShell(Select-String -Path styles.css -Pattern \"gridDrift|borderRotate|staggerRise\" | Select-Object -First 5 | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" }; Select-String -Path app.js -Pattern \"maybeSpawnComet|attachCardEffects\" | Select-Object -First 4 | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" }; Select-String -Path index.html -Pattern \"tech-fx\" | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(Get-NetTCPConnection *)",
+      "PowerShell(Test-Path *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(Set-Location *)",
+      "PowerShell(Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class SPI { [DllImport\\(\"user32.dll\", SetLastError=true\\)] public static extern bool SystemParametersInfo\\(uint uiAction, uint uiParam, ref bool pvParam, uint fWinIni\\); }'; $enabled = $false; [void][SPI]::SystemParametersInfo\\(0x1042, 0, [ref]$enabled, 0\\); \"Windows ClientAreaAnimation \\(animations enabled\\): $enabled\")",
+      "PowerShell(Start-Process \"http://127.0.0.1:6066/?fresh=20260610\")"
+    ]
+  }
+}
