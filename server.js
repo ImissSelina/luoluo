@@ -756,6 +756,17 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, HOST, () => {
-  console.log(`Luoluo Studio website and backend running at http://${HOST}:${PORT}`);
-});
+if (require.main === module) {
+  server.listen(PORT, HOST, () => {
+    console.log(`Luoluo Studio website and backend running at http://${HOST}:${PORT}`);
+  });
+}
+
+module.exports = async function handler(req, res) {
+  try {
+    await route(req, res);
+  } catch (error) {
+    const statusCode = error.statusCode || 500;
+    sendJson(res, statusCode, { error: error.message || "Internal server error" });
+  }
+};
